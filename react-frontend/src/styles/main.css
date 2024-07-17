@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register {
+  display: flex;
+  gap: 2rem;
+}
+.register form .input-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+}
+.register form .input-group > * {
+  font-size: inherit;
+}
+.register form .input-group input {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.register form .input-group input:focus {
+  outline: none;
+  border: 1px solid blue;
+}
+.register form .submit {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-weight: 600;
+  background-color: transparent;
+  cursor: pointer;
+}
+.register .button-controll {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.register .button-controll button {
+  position: relative;
+  padding: 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background-color: transparent;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+}
+.register .button-controll button::after {
+  background-color: gray;
+}
+.register .button-controll .active::after {
+  background-color: blue;
+}
+.register .button-controll button::after, .register .button-controll .active::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 5px;
+  width: 60%;
+}/*# sourceMappingURL=main.css.map */

@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { userEmail } from "../slices/userSlice";
 
 const SignUp = () => {
+  // const userEmail = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -33,6 +38,8 @@ const SignUp = () => {
     event.preventDefault();
 
     if (validateForm()) {
+      // Dispatch the userEmail action
+      dispatch(userEmail(formData.email));
       // Form submission logic here (e.g., calling an API)
       console.log("Form is valid. Submitting...", formData);
     } else {
