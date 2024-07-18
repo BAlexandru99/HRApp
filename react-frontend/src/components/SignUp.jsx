@@ -1,98 +1,119 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userEmail } from "../slices/userSlice";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   // const userEmail = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
+  // Dispatch the userEmail action
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const validateForm = () => {
-    let isValid = true;
-    let newErrors = {};
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is not valid";
-      isValid = false;
-    }
-
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (validateForm()) {
-      // Dispatch the userEmail action
-      dispatch(userEmail(formData.email));
-      // Form submission logic here (e.g., calling an API)
-      console.log("Form is valid. Submitting...", formData);
-    } else {
-      console.error("Form validation failed.");
-    }
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(userEmail(data.email));
   };
 
   return (
-    <div className="sign-up">
-      <h2 className="title">Sign Up</h2>
+    <>
+      <h3>Create an account</h3>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="input-group">
+          <label htmlFor="firstName" className="floating-label">
+            First Name
+          </label>
+          <input
+            className="input-field"
+            placeholder=" "
+            type="text"
+            id="firstName"
+            {...register("firstName", { required: "First Name is required" })}
+          />
+          {errors.firstName && (
+            <span className="error-msg">{errors.firstName.message}</span>
+          )}
+        </div>
 
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            {errors.email && <span className="error">{errors.email}</span>}
-          </div>
+        <div className="input-group">
+          <label htmlFor="lastName" className="floating-label">
+            Last Name
+          </label>
+          <input
+            className="input-field"
+            placeholder=" "
+            type="text"
+            id="lastName"
+            {...register("lastName", { required: "Last Name is required" })}
+          />
+          {errors.lastName && (
+            <span className="error-msg">{errors.lastName.message}</span>
+          )}
+        </div>
 
-          <div className="input-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
-          </div>
+        <div className="input-group">
+          <label htmlFor="email" className="floating-label">
+            Email
+          </label>
+          <input
+            className="input-field"
+            placeholder=" "
+            type="email"
+            id="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+                message: "Invalid email address",
+              },
+            })}
+          />
+          {errors.email && (
+            <span className="error-msg">{errors.email.message}</span>
+          )}
+        </div>
 
-          <button className="submit" type="submit">
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
+        <div className="input-group">
+          <label htmlFor="phoneNumber" className="floating-label">
+            Phone
+          </label>
+          <input
+            className="input-field"
+            placeholder=" "
+            type="tel"
+            id="phoneNumber"
+            {...register("phoneNumber", {
+              required: "Phone number is required",
+            })}
+          />
+          {errors.phoneNumber && (
+            <span className="error-msg">{errors.phoneNumber.message}</span>
+          )}
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="password" className="floating-label">
+            Password
+          </label>
+          <input
+            className="input-field"
+            type="password"
+            autoComplete="on"
+            id="password"
+            {...register("password", { required: "Password is required" })}
+          />
+          {errors.password && (
+            <span className="error-msg">{errors.password.message}</span>
+          )}
+        </div>
+
+        <button className="submit" type="submit">
+          Submit
+        </button>
+      </form>
+    </>
   );
 };
 

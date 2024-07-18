@@ -10,23 +10,25 @@ const Register = () => {
   };
 
   return (
-    <div className="register main">
-      <div className="button-controll">
-        <button
-          className={toggle ? "active" : ""}
-          onClick={() => handleToggle(true)}
-        >
-          Sign Up
-        </button>
-        /
-        <button
-          className={toggle ? "" : "active"}
-          onClick={() => handleToggle(false)}
-        >
-          Log In
-        </button>
+    <div className="main">
+      <div className="register">
+        <div className="register__form">{toggle ? <SignUp /> : <LogIn />}</div>
+        <div className="register__image">
+          <div className="button-controll">
+            {toggle ? (
+              <>
+                <h4>Already have an account?</h4>
+                <button onClick={() => handleToggle(false)}>Log In</button>
+              </>
+            ) : (
+              <>
+                <h4>Don&apos;t have an account yet?</h4>
+                <button onClick={() => handleToggle(true)}>Sign Up</button>
+              </>
+            )}
+          </div>
+        </div>
       </div>
-      {toggle ? <SignUp /> : <LogIn />}
     </div>
   );
 };

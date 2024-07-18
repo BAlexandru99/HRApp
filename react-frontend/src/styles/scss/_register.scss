@@ -1,0 +1,163 @@
+.register {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 15px;
+  overflow: hidden;
+
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  h4 {
+    min-width: 300px;
+  }
+
+  form {
+    height: 100%;
+
+    .submit {
+      margin-top: auto;
+    }
+  }
+
+  &__image,
+  &__form {
+    flex: 1;
+    height: 520px;
+    padding: 1rem 1.5rem;
+  }
+
+  &__image {
+    background-image: url("../assets/register.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  // Form Section
+
+  &__form {
+    background-color: $blue-smoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      > * {
+        font-size: inherit;
+      }
+
+      .input-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin: 0.5rem 0;
+        font-size: 1.25rem;
+        min-width: 300px;
+
+        .error-msg {
+          position: absolute;
+          bottom: -20px;
+          font-size: 1rem;
+          color: $error-red;
+        }
+
+        .input-field {
+          padding: 0.5rem 1rem;
+          border: 2px solid $blue-smoke;
+          border-radius: 5px;
+          outline: none;
+          font-size: inherit;
+        }
+
+        .floating-label {
+          position: absolute;
+          top: 9px;
+          left: 10px;
+          color: $gray;
+          background-color: $white;
+          padding: 0 2px;
+          pointer-events: none;
+          transition: all 0.2s ease;
+        }
+
+        &:focus-within .floating-label,
+        .input-field:not(:placeholder-shown) + .floating-label,
+        &:not(:empty) + .floating-label {
+          top: -9px;
+          left: 20px;
+          font-size: 16px;
+          color: $blue;
+          background-image: linear-gradient($blue-smoke, $white);
+        }
+
+        &:focus-within {
+          .input-field {
+            border-color: $blue;
+          }
+        }
+      }
+
+      .submit {
+        width: fit-content;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        border: 2px solid $blue;
+        background-color: $blue;
+        color: $white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: transparent;
+          color: $blue;
+        }
+      }
+    }
+  }
+
+  // Button section
+
+  .button-controll {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-size: inherit;
+      background-color: transparent;
+      color: $dark-blue;
+      border: 2px solid $dark-blue;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: $white;
+        color: $white;
+      }
+    }
+  }
+}
+
+.log-in {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
