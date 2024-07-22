@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 
 import com.app.HRApp.security.filter.AuthenticationFilter;
 import com.app.HRApp.security.filter.ExceptionHandlerFilter;
@@ -20,7 +23,7 @@ import lombok.AllArgsConstructor;
 @EnableWebSecurity
 @Configuration
 @AllArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig  {
 
     CustomAuthenticationManager customAuthenticationManager;
 
@@ -40,6 +43,5 @@ public class SecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
-    
 }
 
