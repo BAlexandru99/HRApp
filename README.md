@@ -33,4 +33,5 @@ This app is built with a ReactJS front end, a Spring Boot backend, and a databas
 - Node.js and npm
 - Java Development Kit (JDK)
 - Maven
-- MongoDB or MySQL
+- PostgreSQL
+- Docker
