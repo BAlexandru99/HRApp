@@ -7,7 +7,7 @@ The application provides a seamless experience for companies to create accounts,
 
 The HR App is a web-based application aimed at streamlining the hiring process for companies. 
 It allows HR managers to create accounts, post job openings, and manage applications from candidates. 
-This app is built with a ReactJS front end, a Spring Boot backend, and a database (MongoDB or MySQL) to store application data.
+This app is built with a ReactJS front end, a Spring Boot backend, and a database PostgreSQL to store application data.
 
 ## Features
 
