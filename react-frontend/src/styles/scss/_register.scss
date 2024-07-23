@@ -1,134 +1,172 @@
-.register {
-  height: 100%;
+.register-wrapper {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  border-radius: 15px;
-  overflow: hidden;
+  min-height: 100vh;
+  width: 100vw;
 
-  h3 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-  h4 {
-    min-width: 300px;
-  }
+  background-image: url("../assets/register-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-  form {
-    height: 100%;
-
-    .submit {
-      margin-top: auto;
-    }
-  }
-
-  &__image,
-  &__form {
-    flex: 1;
-    height: 520px;
-    padding: 1rem 1.5rem;
-  }
-
-  &__image {
-    background-image: url("../assets/register.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  // Form Section
-
-  &__form {
-    background-color: $blue-smoke;
+  .register {
+    width: clamp(320px, 840px, 100%);
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: transparent;
+    border: 2px solid $white-smoke;
+    backdrop-filter: blur(10px);
+
+    h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    h4 {
+      min-width: 300px;
+    }
+
+    h3,
+    h4 {
+      color: $white;
+    }
 
     form {
+      height: 100%;
+
+      .submit {
+        margin-top: auto;
+      }
+    }
+
+    &__image,
+    &__form {
+      flex: 1;
+      padding: 1rem 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+    }
 
-      > * {
-        font-size: inherit;
-      }
-
-      .input-group {
-        position: relative;
+    &__image {
+      .logo-section {
         display: flex;
-        flex-direction: column;
-        margin: 0.5rem 0;
-        font-size: 1.25rem;
-        min-width: 300px;
+        flex-direction: row;
+        align-items: center;
+        // gap: 1rem;
 
-        .error-msg {
-          position: absolute;
-          bottom: -20px;
-          font-size: 1rem;
-          color: $error-red;
+        &__img {
+          width: 100px;
+          height: 100px;
+          background-image: url("../assets/logo.png");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
         }
 
-        .input-field {
-          padding: 0.5rem 1rem;
-          border: 2px solid $blue-smoke;
-          border-radius: 5px;
-          outline: none;
+        &__title {
+          font-size: 2rem;
+          font-style: italic;
+          font-weight: 600;
+          color: $white;
+        }
+      }
+    }
+    // Form Section
+    &__form {
+      align-items: center;
+      justify-content: center;
+      min-height: 600px;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        > * {
           font-size: inherit;
         }
 
-        .floating-label {
-          position: absolute;
-          top: 9px;
-          left: 10px;
-          color: $gray;
-          background-color: $white;
-          padding: 0 2px;
-          pointer-events: none;
-          transition: all 0.2s ease;
-        }
+        .input-group {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          margin: 0.5rem 0;
+          font-size: 1.25rem;
+          min-width: 300px;
 
-        &:focus-within .floating-label,
-        .input-field:not(:placeholder-shown) + .floating-label,
-        &:not(:empty) + .floating-label {
-          top: -9px;
-          left: 20px;
-          font-size: 16px;
-          color: $blue;
-          background-image: linear-gradient($blue-smoke, $white);
-        }
+          .error-msg {
+            position: absolute;
+            bottom: -20px;
+            left: 18px;
+            font-size: 1rem;
+            color: $error-red;
+          }
 
-        &:focus-within {
           .input-field {
-            border-color: $blue;
+            padding: 0.75rem 1rem;
+            border: 2px solid $white-smoke;
+            background-color: transparent;
+            color: $white;
+            border-radius: 25px;
+            outline: none;
+            font-size: 16px;
+          }
+
+          .floating-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: $white-smoke;
+            border-radius: 25px;
+            background-color: transparent;
+            padding: 2px 4px;
+            pointer-events: none;
+            transition: all 0.2s ease;
+          }
+
+          &:focus-within,
+          &.has-text {
+            .input-field {
+              border: 2px solid $blue;
+            }
+            .floating-label {
+              top: -8px;
+              left: 24px;
+              font-size: 14px;
+              background-color: $blue;
+              color: $white;
+            }
           }
         }
       }
+    }
+  }
+  // Submit button
+  .submit,
+  .form-switch-btn {
+    align-self: flex-end;
+    width: fit-content;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    border: 2px solid $blue;
+    background-color: $blue;
+    color: $white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
-      .submit {
-        width: fit-content;
-        padding: 1rem 2rem;
-        border-radius: 5px;
-        border: 2px solid $blue;
-        background-color: $blue;
-        color: $white;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-
-        &:hover {
-          background-color: transparent;
-          color: $blue;
-        }
-      }
+    &:hover {
+      box-shadow: inset 12px 12px 12px rgba(0, 0, 0, 0.2),
+        inset -12px -12px 12px rgba(255, 255, 255, 0.2);
     }
   }
 
   // Button section
 
   .button-controll {
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -136,20 +174,9 @@
     font-size: 1.5rem;
     font-weight: 600;
 
-    button {
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-      font-size: inherit;
-      background-color: transparent;
-      color: $dark-blue;
-      border: 2px solid $dark-blue;
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &:hover {
-        border-color: $white;
-        color: $white;
-      }
+    .form-switch-btn {
+      align-self: flex-start;
+      // aditional styling
     }
   }
 }

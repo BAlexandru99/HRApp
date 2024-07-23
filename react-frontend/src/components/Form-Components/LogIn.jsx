@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import axios from 'axios';
+import axios from "axios";
 
 const LogIn = () => {
   const {
@@ -10,15 +10,15 @@ const LogIn = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('/authenticate', {
+      const response = await axios.post("/authenticate", {
         username: data.username,
-        password: data.password
+        password: data.password,
       });
-      const token = response.headers['authorization'];
-      localStorage.setItem('token', token);
-      console.log('Login successful', token);
+      const token = response.headers["authorization"];
+      localStorage.setItem("token", token);
+      console.log("Login successful", token);
     } catch (error) {
-      console.error('Login failed', error);
+      console.error("Login failed", error);
     }
   };
 
@@ -27,7 +27,9 @@ const LogIn = () => {
       <h3 className="title">Log In</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="input-group">
-          <label className="floating-label" htmlFor="email">Email:</label>
+          <label className="floating-label" htmlFor="email">
+            Email:
+          </label>
           <input
             className="input-field"
             type="email"
@@ -45,9 +47,11 @@ const LogIn = () => {
           )}
         </div>
         <div className="input-group">
-          <label className="floating-label" htmlFor="password">Password:</label>
+          <label className="floating-label" htmlFor="password">
+            Password:
+          </label>
           <input
-            className="input-field"
+            className="input-field  valid-input"
             type="password"
             autoComplete="on"
             id="password"
@@ -57,7 +61,9 @@ const LogIn = () => {
             <span className="error-msg">{errors.password.message}</span>
           )}
         </div>
-        <button className="submit" type="submit">Submit</button>
+        <button className="submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
