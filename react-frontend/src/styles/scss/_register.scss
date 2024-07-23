@@ -19,6 +19,7 @@
     background-color: transparent;
     border: 2px solid $white-smoke;
     backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 8px 0 #00000080, -2px -2px 8px 0 #ffffff60;
 
     h3 {
       font-size: 2rem;
@@ -158,8 +159,8 @@
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: inset 12px 12px 12px rgba(0, 0, 0, 0.2),
-        inset -12px -12px 12px rgba(255, 255, 255, 0.2);
+      box-shadow: inset 12px 12px 12px #00000033,
+        inset -12px -12px 12px #ffffff33;
     }
   }
 

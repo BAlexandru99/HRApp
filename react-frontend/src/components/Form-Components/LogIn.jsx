@@ -1,12 +1,9 @@
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import axios from "axios";
+import InputGroup from "./InputGroup";
 
 const LogIn = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const methods = useForm();
 
   const onSubmit = async (data) => {
     try {
@@ -23,49 +20,34 @@ const LogIn = () => {
   };
 
   return (
-    <div className="log-in">
-      <h3 className="title">Log In</h3>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-group">
-          <label className="floating-label" htmlFor="email">
-            Email:
-          </label>
-          <input
-            className="input-field"
+    <FormProvider {...methods}>
+      <div className="log-in">
+        <h3 className="title">Log In</h3>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <InputGroup
+            label="Email"
+            id="username"
             type="email"
-            id="email"
-            {...register("username", {
+            validation={{
               required: "Email is required",
               pattern: {
                 value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
                 message: "Invalid email address",
               },
-            })}
+            }}
           />
-          {errors.username && (
-            <span className="error-msg">{errors.username.message}</span>
-          )}
-        </div>
-        <div className="input-group">
-          <label className="floating-label" htmlFor="password">
-            Password:
-          </label>
-          <input
-            className="input-field  valid-input"
-            type="password"
-            autoComplete="on"
+          <InputGroup
+            label="Password"
             id="password"
-            {...register("password", { required: "Password is required" })}
+            type="password"
+            validation={{ required: "Password is required" }}
           />
-          {errors.password && (
-            <span className="error-msg">{errors.password.message}</span>
-          )}
-        </div>
-        <button className="submit" type="submit">
-          Submit
-        </button>
-      </form>
-    </div>
+          <button className="submit" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
+    </FormProvider>
   );
 };
 

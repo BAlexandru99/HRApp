@@ -28,8 +28,8 @@ const InputGroup = ({ label, id, type = "text", validation }) => {
         id={id}
         autoComplete="off"
         onChange={(e) => {
-          setValue(id, e.target.value); // Update form value on change
-          setHasText(e.target.value !== ""); // Update hasText state
+          setValue(id, e.target.value);
+          setHasText(e.target.value !== "");
         }}
       />
       {errors[id] && <span className="error-msg">{errors[id]?.message}</span>}

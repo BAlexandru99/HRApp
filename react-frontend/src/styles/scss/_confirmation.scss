@@ -1,0 +1,28 @@
+.confirmation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+
+  background-image: url("../assets/register-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+    padding: 2rem 4rem;
+    color: $white;
+    border-radius: 15px;
+    background-color: transparent;
+    border: 2px solid $white-smoke;
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 4px 8px 0 #00000080, -2px -2px 8px 0 #ffffff60;
+  }
+}

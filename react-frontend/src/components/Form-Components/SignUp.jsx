@@ -1,11 +1,47 @@
 import { useForm, FormProvider } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import {
+  setFirstName,
+  setLastName,
+  setEmail,
+  setPhone,
+  setPassword,
+} from "../../slices/userSlice";
+
 import InputGroup from "./InputGroup";
 
 const SignUp = () => {
   const methods = useForm();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    // Dispatch actions to update the Redux store
+    dispatch(setFirstName(data.firstName));
+    dispatch(setLastName(data.lastName));
+    dispatch(setEmail(data.email));
+    dispatch(setPhone(data.phoneNumber));
+    dispatch(setPassword(data.password));
+
+    // Axios functionality
+    try {
+      const response = await axios.post("/register", {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
+        password: data.password,
+      });
+      console.log("Registration successful", response.data);
+    } catch (error) {
+      console.error("Registration failed", error);
+    }
+
+    // Navigate to confirmation page
+    // Remove this line for testing purposes
+    navigate("/confirmation");
   };
 
   return (
