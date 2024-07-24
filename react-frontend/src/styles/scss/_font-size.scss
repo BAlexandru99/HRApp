@@ -1,0 +1,40 @@
+$font-size-base: 1rem; // Base font size
+$font-size-scale: 1.25; // Scale factor for modular scaling
+
+$font-size-small: calc($font-size-base / $font-size-scale); // Small font size
+$font-size-medium: $font-size-base * calc($font-size-scale / 1.1); // Medium font size
+$font-size-large: $font-size-base * $font-size-scale; // Large font size
+$font-size-x-large: $font-size-large * $font-size-scale; // Extra large font size
+$font-size-xx-large: $font-size-x-large * $font-size-scale; // Extra extra large font size
+
+// Headings
+
+$font-size-heading-1: 2.5rem; // H1 font size
+$font-size-heading-2: 2rem; // H2 font size
+$font-size-heading-3: 1.75rem; // H3 font size
+$font-size-heading-4: 1.5rem; // H4 font size
+$font-size-heading-5: 1.25rem; // H5 font size
+$font-size-heading-6: 1rem; // H6 font size
+
+// Paragraphs and Text
+
+$font-size-paragraph: $font-size-base; // Paragraph font size
+$font-size-small-text: $font-size-small; // Small text size
+
+// Buttons
+
+$font-size-button: $font-size-small; // Button text size
+
+// Media Queries
+
+@media (min-width: 768px) {
+  $font-size-base: 1.125rem;
+  $font-size-heading-1: 2.75rem;
+  $font-size-heading-2: 2.25rem;
+}
+
+@media (min-width: 1024px) {
+  $font-size-base: 1.25rem;
+  $font-size-heading-1: 3rem;
+  $font-size-heading-2: 2.5rem;
+}

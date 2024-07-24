@@ -5,34 +5,26 @@
   min-height: 100vh;
   width: 100vw;
 
-  background-image: url("../assets/background-1.jpg");
+  background-image: url("../assets/background-3.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
   .register {
-    width: clamp(320px, 840px, 100%);
+    width: clamp(320px, 900px, 100%);
     display: flex;
     flex-wrap: wrap;
     border-radius: 15px;
     overflow: hidden;
     background-color: transparent;
-    border: 2px solid $white-smoke;
+    color: $white;
+    // border: 2px solid $white-smoke;
     backdrop-filter: blur(10px);
-    box-shadow: 4px 4px 8px 0 #00000080, -2px -2px 8px 0 #ffffff60;
+    box-shadow: 4px 4px 8px 0 #00000080, -4px -4px 8px 0 #ffffff60;
 
     h3 {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    h4 {
-      min-width: 300px;
-    }
-
-    h3,
-    h4,
-    h6 {
-      color: $white;
+      font-size: $font-size-heading-3;
+      margin-bottom: 1rem;
     }
 
     &__image,
@@ -43,6 +35,7 @@
       flex-direction: column;
     }
 
+    // Image Section of Register
     &__image {
       .logo-section {
         display: flex;
@@ -58,25 +51,33 @@
           background-position: center;
           background-repeat: no-repeat;
         }
+      }
+      p {
+        text-wrap: pretty;
+      }
 
-        &__title {
-          font-size: 2rem;
-          font-style: italic;
-          font-weight: 600;
+      // Title Loop Section
+      h3 {
+        color: $off-white;
+
+        .loop {
           color: $white;
         }
       }
+
+      // HR Image
       .hr-image {
         width: 100%;
         height: 100%;
-        margin-top: 4rem;
+        margin-top: 1rem;
         background-image: url("../assets/register-image.png");
-        background-size: cover;
+        background-size: 90%;
         background-position: center;
         background-repeat: no-repeat;
       }
     }
-    // Form Section
+
+    // Form Section of Register
     &__form {
       align-items: center;
       justify-content: center;
@@ -88,16 +89,12 @@
         flex-direction: column;
         gap: 1rem;
 
-        > * {
-          font-size: inherit;
-        }
-
         .input-group {
           position: relative;
           display: flex;
           flex-direction: column;
           margin: 0.5rem 0;
-          font-size: 1.25rem;
+          font-size: $font-size-medium;
           min-width: 300px;
 
           .error-msg {
@@ -120,7 +117,7 @@
 
           .floating-label {
             position: absolute;
-            top: 10px;
+            top: 9px;
             left: 10px;
             color: $white-smoke;
             border-radius: 25px;
@@ -136,38 +133,37 @@
               border: 2px solid $blue;
             }
             .floating-label {
+              color: $white;
               top: -8px;
               left: 24px;
               font-size: 14px;
               background-color: $blue;
-              color: $white;
             }
           }
         }
 
         .submit {
           // margin-top: auto;
+          color: $white;
+          letter-spacing: 2px;
+          font-size: $font-size-medium;
+          font-weight: 600;
+          width: 100%;
+          padding: 1rem 2rem;
+          border-radius: 25px;
+          border: 2px solid $cta-primary;
+          background-color: $cta-primary;
+
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            box-shadow: inset 12px 12px 12px #00000033,
+              inset -12px -12px 12px #ffffff33;
+          }
         }
       }
-    }
-  }
-  // Submit button
-  .submit,
-  .form-switch-btn {
-    // align-self: flex-end;
-    width: 100%;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    border: 2px solid $blue;
-    background-color: $blue;
-    color: $white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      box-shadow: inset 12px 12px 12px #00000033,
-        inset -12px -12px 12px #ffffff33;
     }
   }
 
@@ -175,21 +171,16 @@
 
   .button-controll {
     // margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 1rem;
-    font-size: 1.5rem;
-    font-weight: 600;
+    p {
+      color: $off-white;
 
-    .form-switch-btn {
-      align-self: flex-start;
-      // aditional styling
-    }
-    .form-switch {
-      color: $blue;
-      text-decoration: underline;
-      cursor: pointer;
+      .form-switch {
+        font-size: $font-size-medium;
+        font-weight: 600;
+        color: $blue;
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
 }
@@ -200,4 +191,37 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+// Form animations
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Add animation classes */
+.fade-enter {
+  animation: fadeIn 0.5s forwards;
+}
+
+.fade-exit {
+  animation: fadeOut 0.5s forwards;
 }
