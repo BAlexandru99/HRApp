@@ -22,8 +22,8 @@ const LogIn = () => {
   return (
     <FormProvider {...methods}>
       <div className="log-in">
-        <h3 className="title">Log In</h3>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <h3 className="title">Log In</h3>
           <InputGroup
             label="Email"
             id="username"

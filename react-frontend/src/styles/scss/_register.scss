@@ -1,5 +1,6 @@
 .register-wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
@@ -12,6 +13,7 @@
 
   .register {
     width: clamp(320px, 900px, 100%);
+    margin: auto 0;
     display: flex;
     flex-wrap: wrap;
     border-radius: 15px;
@@ -54,6 +56,7 @@
       }
       p {
         text-wrap: pretty;
+        font-size: $font-size-medium;
       }
 
       // Title Loop Section
@@ -164,6 +167,16 @@
           }
         }
       }
+
+      .log-in {
+        form {
+          justify-content: center;
+
+          h3 {
+            text-align: center;
+          }
+        }
+      }
     }
   }
 
@@ -181,6 +194,58 @@
         text-decoration: underline;
         cursor: pointer;
       }
+    }
+  }
+
+  // Footer section of the register
+
+  footer {
+    padding: 1rem 0;
+    margin: 0 auto;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    width: clamp(320px, 90dvw, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .social-media {
+      display: flex;
+      gap: 1rem;
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: 90%;
+        background-repeat: no-repeat;
+        transition: all 0.2s ease;
+
+        &:hover {
+          box-shadow: 4px 4px 6px #00000020, -4px -4px 6px #ffffff20;
+          transform: scale(1.1);
+        }
+
+        &:nth-child(1) {
+          background-image: url("../assets/bxl-discord-alt.svg");
+        }
+        &:nth-child(2) {
+          background-image: url("../assets/bxl-linkedin.svg");
+        }
+        &:nth-child(3) {
+          background-image: url("../assets/bxl-facebook-circle.svg");
+        }
+        &:nth-child(4) {
+          background-image: url("../assets/bxl-github.svg");
+        }
+      }
+    }
+    p {
+      color: $white;
+      font-size: $font-size-small;
     }
   }
 }

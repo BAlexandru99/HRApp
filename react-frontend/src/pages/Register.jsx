@@ -4,7 +4,7 @@ import LogIn from "../components/Form-Components/LogIn";
 import TypewriterComponent from "../components/Form-Components/TypewriterComponent";
 
 const Register = () => {
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   const [animationClass, setAnimationClass] = useState("fade-enter");
 
   const handleToggle = (newToggle) => {
@@ -24,11 +24,10 @@ const Register = () => {
           </div>
           <TypewriterComponent />
           <p>
-            Join a community of forward-thinking HR professionals and experience
-            a seamless, efficient, and intuitive way to manage your HR tasks.
-            From recruitment to performance reviews, our platform simplifies
-            every step of your HR processes, empowering your team to focus on
-            what truly matters.
+            Join forward-thinking HR professionals and streamline your HR tasks
+            with our intuitive platform. From recruitment to performance
+            reviews, simplify processes and empower your team to focus on what
+            truly matters.
           </p>
           <div className="hr-image"></div>
         </div>
@@ -63,6 +62,15 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <footer>
+        <div className="social-media">
+          <a href="#" target="_blank" className="social-icon"></a>
+          <a href="#" target="_blank" className="social-icon"></a>
+          <a href="#" target="_blank" className="social-icon"></a>
+          <a href="#" target="_blank" className="social-icon"></a>
+        </div>
+        <p>Copyright &copy; 2024 HR-Station</p>
+      </footer>
     </div>
   );
 };

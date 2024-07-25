@@ -8,7 +8,7 @@ const TypewriterComponent = () => {
         <Typewriter
           words={["Management!", "Journey!", "Experience!"]}
           loop={0} // 0 = infinite
-          cursor={true} // If true show cursor
+          cursor={false} // If true show cursor
           cursorStyle="|" // Change the style of the cursor
           typeSpeed={90}
           deleteSpeed={50}
