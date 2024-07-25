@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,5 +40,21 @@ public class User {
     @NonNull
 	@Column(nullable = false)
 	private String password;
+
+	@NotBlank(message = "first name cannot be blank")
+	@NonNull
+	@Column(nullable = false)
+	private String firstName;
+
+	@NotBlank(message = "last name cannot be blank")
+	@NonNull
+	@Column(nullable = false)
+	private String lastName;
+
+	@NotNull(message = "phone number cannot be blank")
+	@Column(nullable = false)
+	private Long phoneNumber;
+
+	
 
 }

@@ -27,10 +27,10 @@ const SignUp = () => {
 
     // Axios functionality
     try {
-      const response = await axios.post("/register", {
+      const response = await axios.post("/user/register", {
         firstName: data.firstName,
         lastName: data.lastName,
-        email: data.email,
+        username: data.username,
         phoneNumber: data.phoneNumber,
         password: data.password,
       });
@@ -60,7 +60,7 @@ const SignUp = () => {
         />
         <InputGroup
           label="Email"
-          id="email"
+          id="username"
           type="email"
           validation={{
             required: "Email is required",
