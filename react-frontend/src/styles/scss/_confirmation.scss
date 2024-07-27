@@ -1,4 +1,4 @@
-.confirmation {
+.middle-page {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
 
+.confirmation,
+.verified {
   &__content {
     display: flex;
     flex-direction: column;
@@ -24,5 +27,14 @@
     border: 2px solid $white-smoke;
     backdrop-filter: blur(10px);
     box-shadow: 4px 4px 8px 0 #00000080, -4px -4px 8px 0 #ffffff60;
+  }
+}
+
+.verified {
+  &__content {
+    a {
+      color: $blue;
+      text-decoration: none;
+    }
   }
 }

@@ -5,11 +5,14 @@
   box-sizing: border-box;
 }
 
-@import "./scss/font-size";
-@import "./scss/colors";
-@import "./scss/register";
+@import "./scss/_font-size";
+@import "./scss/_colors";
+@import "./scss/_animations";
+@import "./scss/_layout";
+@import "./scss/_sidebar";
+@import "./scss/_dashboard";
+@import "./scss/_register";
 @import "./scss/_confirmation";
-
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 body {
@@ -19,22 +22,28 @@ body {
   }
 }
 
-// Layout
-.layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
 // Variables
 
 .main {
-  min-height: 90vh;
-  width: 100vw;
-  display: flex;
+  height: 100dvh;
+  flex-grow: 3;
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
+}
+
+// Flexbox
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
 }

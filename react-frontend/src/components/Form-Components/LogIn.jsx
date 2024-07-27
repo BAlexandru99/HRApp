@@ -1,9 +1,15 @@
 import { useForm, FormProvider } from "react-hook-form";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import InputGroup from "./InputGroup";
+import BtnLoading from "../BtnLoading";
 
 const LogIn = () => {
+  const navigate = useNavigate();
   const methods = useForm();
+  const [btnLoading, setBtnLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const onSubmit = async (data) => {
     try {
@@ -17,6 +23,9 @@ const LogIn = () => {
     } catch (error) {
       console.error("Login failed", error);
     }
+    setBtnLoading(true);
+    setIsDisabled(true);
+    setTimeout(() => navigate("/dashboard"), 1500);
   };
 
   return (
@@ -42,8 +51,13 @@ const LogIn = () => {
             type="password"
             validation={{ required: "Password is required" }}
           />
-          <button className="submit" type="submit">
-            Submit
+          <button
+            disabled={isDisabled ? true : false}
+            className="submit flex-row center"
+            type="submit"
+          >
+            {btnLoading ? <BtnLoading /> : ""}
+            Log In
           </button>
         </form>
       </div>
