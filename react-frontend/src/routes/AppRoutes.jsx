@@ -3,17 +3,23 @@ import { ErrorPage } from "../pages/ErrorPage";
 import Layout from "../pages/Layout";
 import Home from "../pages/Home";
 import Confirmation from "../pages/Confirmation";
-import TestPage from "../pages/Confirmation";
+import Dashboard from "../pages/Dashboard";
+import Candidates from "../pages/Candidates";
+import Jobs from "../pages/Jobs";
+import { Verified } from "../pages/Verified";
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
+        <Route index element={<Home />} />
         <Route path="/" element={<Layout />}>
-          <Route path="/test" element={<TestPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/candidates" element={<Candidates />} />
         </Route>
         <Route path="/confirmation" element={<Confirmation />} />
-        <Route index element={<Home />} />
+        <Route path="/verified" element={<Verified />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>

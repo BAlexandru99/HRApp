@@ -1,0 +1,55 @@
+// Define the @property rule
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.btn-loading-animation {
+  width: 24px;
+  height: 24px;
+
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+
+  .spinner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: $cta-primary;
+
+    &::after,
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      padding: 2px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-image: conic-gradient(from var(--angle), transparent, $white);
+      z-index: -1;
+      animation: 1s spin linear infinite;
+    }
+
+    &::before {
+      filter: blur(1.5rem);
+      opacity: 0.5;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+
+  to {
+    --angle: 360deg;
+  }
+}

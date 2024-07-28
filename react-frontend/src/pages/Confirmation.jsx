@@ -10,7 +10,7 @@ const Confirmation = () => {
   }, 6000);
 
   return (
-    <div className="confirmation">
+    <div className="confirmation middle-page">
       <div className="confirmation__content">
         <h1>
           Thank you {firstName} {lastName}!

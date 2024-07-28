@@ -1,4 +1,5 @@
 import { useForm, FormProvider } from "react-hook-form";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -9,10 +10,13 @@ import {
   setPhone,
   setPassword,
 } from "../../slices/userSlice";
+import BtnLoading from "../BtnLoading";
 
 import InputGroup from "./InputGroup";
 
 const SignUp = () => {
+  const [btnLoading, setBtnLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const methods = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,7 +25,7 @@ const SignUp = () => {
     // Dispatch actions to update the Redux store
     dispatch(setFirstName(data.firstName));
     dispatch(setLastName(data.lastName));
-    dispatch(setEmail(data.email));
+    dispatch(setEmail(data.username));
     dispatch(setPhone(data.phoneNumber));
     dispatch(setPassword(data.password));
 
@@ -41,7 +45,9 @@ const SignUp = () => {
 
     // Navigate to confirmation page
     // Remove this line for testing purposes
-    navigate("/confirmation");
+    setBtnLoading(true);
+    setIsDisabled(true);
+    setTimeout(() => navigate("/confirmation"), 1500); //
   };
 
   return (
@@ -82,7 +88,12 @@ const SignUp = () => {
           type="password"
           validation={{ required: "Password is required" }}
         />
-        <button className="submit" type="submit">
+        <button
+          disabled={isDisabled ? true : false}
+          className="submit flex-row center"
+          type="submit"
+        >
+          {btnLoading ? <BtnLoading /> : ""}
           Submit
         </button>
       </form>
