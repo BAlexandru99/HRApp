@@ -1,5 +1,7 @@
 package com.app.HRApp.user;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,6 +57,13 @@ public class User {
 	@Column(nullable = false)
 	private Long phoneNumber;
 
-	
+	@Column(name = "data", columnDefinition = "TIMESTAMP(0)")
+    private LocalDateTime timestamp;
+
+	@Column(unique = true)
+	private String token;
+
+	@Column
+	private boolean isEnabled = false;
 
 }

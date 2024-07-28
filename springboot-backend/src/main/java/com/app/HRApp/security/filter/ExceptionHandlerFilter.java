@@ -2,6 +2,7 @@ package com.app.HRApp.security.filter;
 
 import java.io.IOException;
 
+import javax.management.RuntimeOperationsException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +27,18 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.getWriter().write("JWT NOT VALID");
             response.getWriter().flush();
+
+        } catch (AccountNotActivatedException e){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("BAD REQUEST");
+            response.getWriter().flush();
+        
         } catch (RuntimeException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("BAD REQUEST");
             response.getWriter().flush();
-        }  
+    }
+    
     }
 }
 

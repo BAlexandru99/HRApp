@@ -1,6 +1,8 @@
-package com.app.HRApp.sevice;
+package com.app.HRApp.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import lombok.AllArgsConstructor;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private EmailService emailService;
 
     @Override
     public User getUser(Long id) {
@@ -25,8 +28,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
+        if(userRepository.existsByUsername(user.getUsername())){
+            throw new RuntimeException("Email already exist!");
+        }else{
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setToken(UUID.randomUUID().toString());
+        emailService.sendSimpleMailMessage(user.getLastName(), user.getUsername(), user.getToken());
+        user.setTimestamp(LocalDateTime.now());
         return userRepository.save(user);
+        }
     }
 
     static User unwrapUser(Optional<User> entity, Long id) {
@@ -39,4 +49,14 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findByUsername(username);
         return unwrapUser(user, 404L);
     }
+
+    @Override
+    public User verifyToken(String token) {
+        Optional<User> optionalUser = userRepository.findByToken(token);
+        User user = optionalUser.get();
+        user.setEnabled(true);
+        return userRepository.save(user);
+    }
+
+    
 }
