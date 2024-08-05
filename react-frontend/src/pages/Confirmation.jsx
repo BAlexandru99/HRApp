@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Confirmation = () => {
   const { firstName, lastName, email } = useSelector((state) => state.user);

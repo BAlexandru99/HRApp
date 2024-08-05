@@ -7,5 +7,7 @@ public interface UserService {
     User getUser(String username);
     User saveUser(User user);
     User verifyToken(String token);
-
+    User updatePassword(String password, String username, String newPassword);
+    void sendResetPassword(String username);
+    void resetPassword(String newPassword , String token);
 }

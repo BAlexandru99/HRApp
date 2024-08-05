@@ -1,14 +1,18 @@
 package com.app.HRApp.service;
 
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.HRApp.exception.EntityNotFoundException;
+import com.app.HRApp.repository.PasswordResetTokenRepository;
 import com.app.HRApp.repository.UserRepository;
+import com.app.HRApp.user.PasswordResetToken;
 import com.app.HRApp.user.User;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +22,7 @@ import lombok.AllArgsConstructor;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordResetTokenRepository passwordResetTokenRepository;
     private EmailService emailService;
 
     @Override
@@ -58,5 +63,48 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public User updatePassword(String password, String username, String newPassword) {
+        Optional<User> user = userRepository.findByUsername(username);
+        User finalUser = user.orElseThrow(() -> new RuntimeException("User not found"));
+        if(bCryptPasswordEncoder.matches(password, finalUser.getPassword())){
+            finalUser.setPassword(bCryptPasswordEncoder.encode(newPassword));
+            userRepository.save(finalUser);
+            return finalUser;
+        } else throw new RuntimeException("Inccorect password");
+    }
+
+    @Override
+    public void sendResetPassword(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        User finalUser = user.orElseThrow(()-> new RuntimeException("User not found!"));
+        String token = UUID.randomUUID().toString();
+        PasswordResetToken passwordReset = new PasswordResetToken();
+
+        passwordReset.setUsername(username);
+        passwordReset.setToken(token);
+        passwordReset.setCreationDate(LocalDateTime.now());
+
+        passwordResetTokenRepository.save(passwordReset);
+
+        emailService.sendPasswordChangeMail(finalUser.getFirstName(), username, token);    
+    }
+
+    @Override
+    public void resetPassword(String newPassword , String token) {
+        Optional<PasswordResetToken> tokenOption = passwordResetTokenRepository.findByToken(token);
+        if (tokenOption.isEmpty()) {
+            throw new NoSuchElementException("Invalid token");
+        }
+        PasswordResetToken finalToken = tokenOption.get();
+
+        Optional<User> user = userRepository.findByUsername(finalToken.getUsername());
+        User finalUser = user.orElseThrow(() -> new NoSuchElementException("No user found with email"));
+
+        finalUser.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        userRepository.save(finalUser);
+
+    }
+    
     
 }

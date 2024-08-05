@@ -21,6 +21,9 @@ const LogIn = () => {
       localStorage.setItem("token", token);
       console.log("Login successful", token);
     } catch (error) {
+      if(error.response && error.response.status == 401){
+        setError('Incorrect credentials');
+      }
       console.error("Login failed", error);
     }
     setBtnLoading(true);

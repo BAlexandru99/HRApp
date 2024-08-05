@@ -4,6 +4,7 @@ package com.app.HRApp.service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.management.RuntimeErrorException;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -55,6 +56,30 @@ public class EmailServiceImpl implements EmailService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+        @Override
+        public void sendPasswordChangeMail(String name, String to, String token) {
+            try{
+                MimeMessage message = emailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+                Context context = new Context();
+                context.setVariable("username", name);
+                context.setVariable("activation_code", token);
+                context.setVariable("confirmationUrl", host + "user/reset-password?token=" + token);
+
+                String htmlContent = templateEngine.process("reset-email", context);
+
+                helper.setTo(to);
+                helper.setSubject("Reset Password");
+                helper.setFrom("noreply@hr-station.com");
+                helper.setText(htmlContent, true);
+
+                emailSender.send(message);
+            }catch(MessagingException e){
+                throw new RuntimeException(e.getMessage());
+            }
+        }
 }
 
 

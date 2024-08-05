@@ -19,6 +19,9 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+        p {
+         margin-bottom: -0.5em;
+        }
         .activation-code {
             font-size: 36px;
             text-align: center;
@@ -51,13 +54,17 @@
 <body>
 <div class="container">
     <img src="C:\Users\alexi\Desktop\App\springboot-backend\src\main\resources\img\logo.png" alt="logo" />
-    <h1>Account Activation</h1>
+    <h1>Password Reset</h1>
     <p class="greeting">Hello <span th:text="${username}"></span>,</p>
-    <p>Thank you for signing up on the HRStation platform! Please use the following activation code to activate your account:</p>
+    <p>Someone (hopefully you!) has requested to change you HRStation password.</p>
+    <p>Please click the link bellow to change your password now.</p>
     <div class="activation-link">
-        <a th:href="${confirmationUrl}" target="_blank">Activate your account</a>
+        <a th:href="${confirmationUrl}" target="_blank">Reset you password</a>
+        <p>If you didn't make this request, please disregard this email.</p>
         <p>Please note that this link will expire in <mark class="red">30 minutes</mark> !</p>
     </div>
+    <p>Sincerely,</p>
+    <p>The HRStation team</p>
 </div>
 </body>
 </html>

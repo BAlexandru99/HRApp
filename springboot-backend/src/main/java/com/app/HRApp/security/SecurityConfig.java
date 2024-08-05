@@ -3,6 +3,7 @@ package com.app.HRApp.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -36,6 +37,9 @@ public class SecurityConfig  {
             .authorizeRequests()
             .antMatchers(HttpMethod.POST , SecurityConstants.REGISTER_PATH).permitAll()
             .antMatchers(HttpMethod.GET, SecurityConstants.ACTIVATION_PATH).permitAll()
+            .antMatchers(HttpMethod.POST, SecurityConstants.RESET_PATH).permitAll()
+            .antMatchers(HttpMethod.GET, SecurityConstants.RESET_PATH).permitAll()
+            .antMatchers(HttpMethod.POST, SecurityConstants.RESET_PATH_PASSWORD).permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
