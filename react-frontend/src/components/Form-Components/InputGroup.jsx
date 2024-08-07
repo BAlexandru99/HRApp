@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
+import PropTypes from "prop-types";
 
 const InputGroup = ({ label, id, type = "text", validation }) => {
   const [hasText, setHasText] = useState(false);
@@ -35,6 +36,18 @@ const InputGroup = ({ label, id, type = "text", validation }) => {
       {errors[id] && <span className="error-msg">{errors[id]?.message}</span>}
     </div>
   );
+};
+
+InputGroup.propTypes = {
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  validation: PropTypes.object,
+};
+
+InputGroup.defaultProps = {
+  type: "text",
+  validation: {},
 };
 
 export default InputGroup;

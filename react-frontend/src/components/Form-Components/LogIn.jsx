@@ -1,6 +1,6 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import InputGroup from "./InputGroup";
 import BtnLoading from "../BtnLoading";
@@ -8,10 +8,14 @@ import BtnLoading from "../BtnLoading";
 const LogIn = () => {
   const navigate = useNavigate();
   const methods = useForm();
+  const { setError } = methods; // Destructure setError from methods
   const [btnLoading, setBtnLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
 
   const onSubmit = async (data) => {
+    setBtnLoading(true);
+    setIsDisabled(true);
+
     try {
       const response = await axios.post("/authenticate", {
         username: data.username,
@@ -20,15 +24,33 @@ const LogIn = () => {
       const token = response.headers["authorization"];
       localStorage.setItem("token", token);
       console.log("Login successful", token);
+      navigate("/dashboard");
     } catch (error) {
-      if(error.response && error.response.status == 401){
-        setError('Incorrect credentials');
+      if (error.response) {
+        if (error.response.status === 401) {
+          setError("username", {
+            type: "manual",
+            message: "Incorrect email or password",
+          });
+        } else if (error.response.status === 403) {
+          setError("username", {
+            type: "manual",
+            message: "Email not verified",
+          });
+        } else {
+          setError("username", {
+            type: "manual",
+            message: "An error occurred",
+          });
+        }
+      } else {
+        setError("username", {
+          type: "manual",
+          message: "An unexpected error occurred",
+        });
       }
       console.error("Login failed", error);
     }
-    setBtnLoading(true);
-    setIsDisabled(true);
-    setTimeout(() => navigate("/dashboard"), 1500);
   };
 
   return (
@@ -55,14 +77,18 @@ const LogIn = () => {
             validation={{ required: "Password is required" }}
           />
           <button
-            disabled={isDisabled ? true : false}
+            disabled={isDisabled}
             className="submit flex-row center"
             type="submit"
           >
-            {btnLoading ? <BtnLoading /> : ""}
             Log In
+            {btnLoading ? <BtnLoading /> : ""}
           </button>
         </form>
+        <h4 className="forgot-password-section">
+          Forgot Password?
+          <Link to="/forgot-password">Click here</Link>
+        </h4>
       </div>
     </FormProvider>
   );

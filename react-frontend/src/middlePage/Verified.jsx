@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const Verified = () => {
   return (
     <div className="verified middle-page">
-      <div className="verified__content">
+      <div className="verified__content flex-col">
         <h1>Congratulations!</h1>
         <h2>You have successfully verified your account.</h2>
         <h2>

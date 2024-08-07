@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
-const Confirmation = () => {
+export const Confirmation = () => {
   const { firstName, lastName, email } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -12,7 +11,7 @@ const Confirmation = () => {
 
   return (
     <div className="confirmation middle-page">
-      <div className="confirmation__content">
+      <div className="confirmation__content flex-col">
         <h1>
           Thank you {firstName} {lastName}!
         </h1>
@@ -23,5 +22,3 @@ const Confirmation = () => {
     </div>
   );
 };
-
-export default Confirmation;

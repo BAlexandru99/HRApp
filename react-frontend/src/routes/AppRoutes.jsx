@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ErrorPage } from "../pages/ErrorPage";
 import Layout from "../pages/Layout";
 import Home from "../pages/Home";
-import Confirmation from "../pages/Confirmation";
 import Dashboard from "../pages/Dashboard";
 import Candidates from "../pages/Candidates";
 import Jobs from "../pages/Jobs";
-import { Verified } from "../pages/Verified";
+import { ErrorPage } from "../middlePage/ErrorPage";
+import { Confirmation } from "../middlePage/Confirmation";
+import { Verified } from "../middlePage/Verified";
+import { ForgotPassword } from "../middlePage/ForgotPassword";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
         </Route>
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/verified" element={<Verified />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>

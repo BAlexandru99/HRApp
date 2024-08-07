@@ -91,82 +91,6 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
-
-        .input-group {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          margin: 0.5rem 0;
-          font-size: $font-size-medium;
-          min-width: 300px;
-
-          .error-msg {
-            position: absolute;
-            bottom: -20px;
-            left: 18px;
-            font-size: 1rem;
-            color: $error-red;
-          }
-
-          .input-field {
-            padding: 0.75rem 1rem;
-            border: 2px solid $white-smoke;
-            background-color: transparent;
-            color: $white;
-            border-radius: 25px;
-            outline: none;
-            font-size: 16px;
-          }
-
-          .floating-label {
-            position: absolute;
-            top: 9px;
-            left: 10px;
-            color: $white-smoke;
-            border-radius: 25px;
-            background-color: transparent;
-            padding: 2px 4px;
-            pointer-events: none;
-            transition: all 0.2s ease;
-          }
-
-          &:focus-within,
-          &.has-text {
-            .input-field {
-              border: 2px solid $blue;
-            }
-            .floating-label {
-              color: $white;
-              top: -8px;
-              left: 24px;
-              font-size: 14px;
-              background-color: $blue;
-            }
-          }
-        }
-
-        .submit {
-          // margin-top: auto;
-          position: relative;
-          color: $white;
-          letter-spacing: 2px;
-          font-size: $font-size-medium;
-          font-weight: 600;
-          width: 100%;
-          padding: 1rem 2rem;
-          border-radius: 25px;
-          border: 2px solid $cta-primary;
-          background-color: $cta-primary;
-
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-
-          &:hover {
-            box-shadow: inset 12px 12px 12px #00000033,
-              inset -12px -12px 12px #ffffff33;
-          }
-        }
       }
 
       .log-in {
@@ -257,6 +181,97 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.forgot-password-section {
+  text-align: center;
+  justify-self: flex-end;
+  font-size: $font-size-small;
+  margin: 0.25rem;
+  a {
+    margin-left: 0.25rem;
+    font-weight: 700;
+    color: $blue;
+    cursor: pointer;
+  }
+}
+
+// Input group section
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  font-size: $font-size-medium;
+  min-width: 300px;
+
+  .error-msg {
+    position: absolute;
+    bottom: -20px;
+    left: 18px;
+    font-size: 1rem;
+    color: $error-red;
+  }
+
+  .input-field {
+    padding: 0.75rem 1rem;
+    border: 2px solid $white-smoke;
+    background-color: transparent;
+    color: $white;
+    border-radius: 25px;
+    outline: none;
+    font-size: 16px;
+  }
+
+  .floating-label {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    color: $white-smoke;
+    border-radius: 25px;
+    background-color: transparent;
+    padding: 2px 4px;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+
+  &:focus-within,
+  &.has-text {
+    .input-field {
+      border: 2px solid $blue;
+    }
+    .floating-label {
+      color: $white;
+      top: -8px;
+      left: 24px;
+      font-size: 14px;
+      background-color: $blue;
+    }
+  }
+}
+
+// Submit button section
+.submit {
+  // margin-top: auto;
+  position: relative;
+  color: $white;
+  letter-spacing: 2px;
+  font-size: $font-size-medium;
+  font-weight: 600;
+  width: 100%;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  border: 2px solid $cta-primary;
+  background-color: $cta-primary;
+
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: inset 12px 12px 12px #00000033, inset -12px -12px 12px #ffffff33;
+  }
 }
 
 // Form animations
