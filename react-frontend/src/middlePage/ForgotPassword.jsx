@@ -2,6 +2,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import BtnLoading from "../components/BtnLoading";
 import InputGroup from "../components/Form-Components/InputGroup";
 
@@ -11,11 +12,25 @@ export const ForgotPassword = () => {
   const [btnLoading, setBtnLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     setBtnLoading(true);
     setIsDisabled(true);
-    setTimeout(() => navigate("/"), 1500);
+  
+    try {
+      const params = new URLSearchParams();
+      params.append('username', data.email);
+      const response = await axios.post('/user/reset', params, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+      console.log("Reset successful", response.data);
+    } catch (error) {
+      console.error("Reset failed", error.response ? error.response.data : error.message);
+    } finally {
+      setTimeout(() => navigate("/"), 1500);
+    }
   };
 
   return (
@@ -51,8 +66,7 @@ export const ForgotPassword = () => {
               className="submit flex-row center"
               type="submit"
             >
-              {btnLoading ? <BtnLoading /> : ""}
-              Submit
+              {btnLoading ? <BtnLoading /> : "Submit"}
             </button>
           </form>
         </FormProvider>

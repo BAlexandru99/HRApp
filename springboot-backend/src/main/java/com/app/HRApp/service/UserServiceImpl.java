@@ -1,6 +1,7 @@
 package com.app.HRApp.service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,6 +60,11 @@ public class UserServiceImpl implements UserService {
     public User verifyToken(String token) {
         Optional<User> optionalUser = userRepository.findByToken(token);
         User user = optionalUser.get();
+        LocalDateTime expirationTime = user.getTimestamp().minus(30 , ChronoUnit.MINUTES);
+        if(user.getTimestamp().isAfter(expirationTime)){
+            userRepository.delete(user);
+            throw new RuntimeException("Activation Code Expired!");
+        }
         user.setEnabled(true);
         return userRepository.save(user);
     }
@@ -100,10 +106,18 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> user = userRepository.findByUsername(finalToken.getUsername());
         User finalUser = user.orElseThrow(() -> new NoSuchElementException("No user found with email"));
-
         finalUser.setPassword(bCryptPasswordEncoder.encode(newPassword));
         userRepository.save(finalUser);
 
+    }
+
+    @Override
+    public void verifyResetToken(String token) {
+       Optional<PasswordResetToken> tokenOptional = passwordResetTokenRepository.findByToken(token);
+       PasswordResetToken finalToken = tokenOptional.orElseThrow(() -> new RuntimeException("Something went wrong!"));
+       if(finalToken.getCreationDate().plusMinutes(30).isBefore(LocalDateTime.now())){
+            throw new RuntimeException("Token expired!");
+       }
     }
     
     

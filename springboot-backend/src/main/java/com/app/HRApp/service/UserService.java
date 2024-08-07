@@ -10,4 +10,5 @@ public interface UserService {
     User updatePassword(String password, String username, String newPassword);
     void sendResetPassword(String username);
     void resetPassword(String newPassword , String token);
+    void verifyResetToken(String token);
 }

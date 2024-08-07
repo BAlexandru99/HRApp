@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.HRApp.exception.EntityNotFoundException;
 import com.app.HRApp.security.filter.AccountNotActivatedException;
 import com.app.HRApp.service.UserService;
 import com.app.HRApp.user.User;
@@ -69,18 +70,33 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
+	@GetMapping("/reset")
+	public ResponseEntity<Void> showResetPassordPage(@RequestParam("token") String token){
+		userService.verifyResetToken(token);
+		return ResponseEntity.status(HttpStatus.FOUND)
+							 .location(URI.create("http://localhost:5173/reset-password?token=" + token))
+							 .build();
+	}
+	
+
 	@PostMapping("/reset-password")
 	public ResponseEntity<String> updatePassword(@RequestParam("token") String token, 
                                              @RequestParam("newPassword") String newPassword) {
     	userService.resetPassword(newPassword, token);
     	return new ResponseEntity<>(HttpStatus.OK);
-}
+	}
 
 
 	@ExceptionHandler(AccountNotActivatedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public ResponseEntity<String> handleAccountNotActivatedException(AccountNotActivatedException ex){
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+	}
+
+	@ExceptionHandler(EntityNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(NoSuchElementException.class)

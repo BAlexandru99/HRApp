@@ -15,6 +15,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/user\/register/, '/user/register'),
       },
+      '/user/reset': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/user\/reset/, '/user/reset'),
+      },
     },
   },
 });

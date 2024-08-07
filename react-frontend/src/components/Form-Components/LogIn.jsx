@@ -27,15 +27,21 @@ const LogIn = () => {
       navigate("/dashboard");
     } catch (error) {
       if (error.response) {
+        const message = error.response.data || "An error occurred";
         if (error.response.status === 401) {
           setError("username", {
             type: "manual",
-            message: "Incorrect email or password",
+            message: message,
           });
         } else if (error.response.status === 403) {
           setError("username", {
             type: "manual",
-            message: "Email not verified",
+            message: message,
+          });
+        } else if (error.response.status === 404) {
+          setError("username", {
+            type: "manual",
+            message: "Account not found",
           });
         } else {
           setError("username", {
@@ -50,6 +56,9 @@ const LogIn = () => {
         });
       }
       console.error("Login failed", error);
+    } finally {
+      setBtnLoading(false);
+      setIsDisabled(false);
     }
   };
 
