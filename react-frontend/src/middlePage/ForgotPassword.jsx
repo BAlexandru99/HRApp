@@ -16,20 +16,22 @@ export const ForgotPassword = () => {
     console.log(data);
     setBtnLoading(true);
     setIsDisabled(true);
-  
     try {
       const params = new URLSearchParams();
-      params.append('username', data.email);
-      const response = await axios.post('/user/reset', params, {
+      params.append("username", data.email);
+      const response = await axios.post("/user/reset", params, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
       });
       console.log("Reset successful", response.data);
     } catch (error) {
-      console.error("Reset failed", error.response ? error.response.data : error.message);
+      console.error(
+        "Reset failed",
+        error.response ? error.response.data : error.message
+      );
     } finally {
-      setTimeout(() => navigate("/"), 1500);
+      setTimeout(() => navigate("/forgot-password-confirmation"), 1500);
     }
   };
 
@@ -44,11 +46,6 @@ export const ForgotPassword = () => {
         <h3>Follow the instructions in the email to reset your password!</h3>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} className="flex-col">
-            <InputGroup
-              label="First Name"
-              id="firstName"
-              validation={{ required: "First name is required" }}
-            />
             <InputGroup
               label="Email Address"
               id="email"
@@ -66,7 +63,8 @@ export const ForgotPassword = () => {
               className="submit flex-row center"
               type="submit"
             >
-              {btnLoading ? <BtnLoading /> : "Submit"}
+              Submit
+              {btnLoading ? <BtnLoading /> : ""}
             </button>
           </form>
         </FormProvider>

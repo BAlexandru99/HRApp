@@ -12,7 +12,12 @@
 }
 .confirmation,
 .verified,
-.forgot-password {
+.forgot-password,
+.forgot-password-confirmation,
+.expired-verification,
+.expired-password-reset,
+.password-reset-form,
+.reset-password-confirmation {
   &__content {
     align-items: center;
     justify-content: center;
@@ -37,11 +42,12 @@
   }
 }
 
-.forgot-password {
+.forgot-password,
+.password-reset-form {
   &__content {
     margin: 0.5rem 0;
     form {
-      gap: 1rem;
+      gap: 1.25rem;
     }
   }
 }

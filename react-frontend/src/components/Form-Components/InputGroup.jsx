@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import PropTypes from "prop-types";
 
-const InputGroup = ({ label, id, type = "text", validation }) => {
+const InputGroup = ({ label, id, type = "text", validation = {} }) => {
   const [hasText, setHasText] = useState(false);
   const {
     register,
@@ -43,11 +43,6 @@ InputGroup.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string,
   validation: PropTypes.object,
-};
-
-InputGroup.defaultProps = {
-  type: "text",
-  validation: {},
 };
 
 export default InputGroup;
